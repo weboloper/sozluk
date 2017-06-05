@@ -1,0 +1,11 @@
+#post/entry/comment status
+published 	- post/entry/comment is published
+pending 	- post/entry/comment is waiting fo moderation
+moderated 	- post/entry/comment passed moderation, can not be re-moderated
+banned 		- post/entry/comment can not pass moderation and get banned
+trash 		- post/entry/comment deleted by user
+
+#user status
+pending		- user registered waiting for e-mail confirmation
+active		- user is active
+caylak		- user is caylak

@@ -7,10 +7,10 @@ $font-antialiased: true !default;
 $line-height-base: 1.5 !default;
 $spacing-base: 1.5em !default;
 
-$base-bg: #f3f3f3;
-$text-color: #111;
+$base-bg: #ddd;
+$text-color: #000;
 $link-color: #191989;
-$dark-bg: #636363;
+$dark-bg: #7b8b99;
 
 body {
 	font-family:  $font-family-base;
@@ -19,6 +19,7 @@ body {
     background-color: $base-bg;
     color: $text-color;
     margin: 0;
+    text-transform: lowercase;
 }
 
 a {
@@ -88,6 +89,39 @@ a {
         left: -1.5rem;
         top:-3px;
     }
+
+    ul {
+        list-style: none;
+        position: relative;
+        color: lighten($text-color,25%);
+        margin-top: .5rem;
+
+        &:before {
+                content: " ";
+                height: 100%;
+                width: 2px;
+                left: 15px;
+                background-color: darken($base-bg,15%);
+                display: block;
+                position: absolute;
+                top: 0;
+            }
+
+        li {
+
+            &:before {
+                content: " ";
+                height: 2px;
+                width: 20px;
+                left: -25px;
+                background-color: darken($base-bg,15%);
+                display: block;
+                position: absolute;
+                top: 20px;
+            }
+           
+        }
+    }
 }
 .entry-meta {
     color: lighten($text-color,50%);
@@ -102,4 +136,12 @@ a {
     li {
         margin-bottom: .5rem;
     }
+}
+
+footer {
+    margin-top: 2rem;
+    padding: 1rem 0;
+     text-align: center;
+     border-top: 2px solid $dark-bg;
+
 }
