@@ -7,7 +7,7 @@ $font-antialiased: true !default;
 $line-height-base: 1.5 !default;
 $spacing-base: 1.5em !default;
 
-$base-bg: #dcdcdc;
+$base-bg: #f3f3f3;
 $text-color: #111;
 $link-color: #191989;
 $dark-bg: #636363;
@@ -81,6 +81,7 @@ a {
     list-style: none;
     li {
         position: relative;
+        margin-bottom: 1rem;
     }
     .vote {
         position: absolute;
@@ -89,17 +90,16 @@ a {
     }
 }
 .entry-meta {
-    color: lighten($text-color,10%);
+    color: lighten($text-color,50%);
     font-size: 11px;
  
     a {
-       color: lighten($text-color,10%);
+       color: lighten($text-color,50%);
     }
 }
 
 #post-list {
     li {
         margin-bottom: .5rem;
-
     }
 }

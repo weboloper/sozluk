@@ -2,7 +2,7 @@ body {
   font-family: Verdana, Geneva, sans-serif;
   font-size: 12px;
   line-height: 1.5;
-  background-color: #dcdcdc;
+  background-color: #f3f3f3;
   color: #111;
   margin: 0; }
 
@@ -21,7 +21,7 @@ a {
   background-color: #636363;
   padding: .5rem; }
   #header a {
-    color: #dcdcdc; }
+    color: #f3f3f3; }
 
 #row {
   display: -webkit-box;
@@ -55,17 +55,18 @@ a {
   padding: 0;
   list-style: none; }
   #entry-list li {
-    position: relative; }
+    position: relative;
+    margin-bottom: 1rem; }
   #entry-list .vote {
     position: absolute;
     left: -1.5rem;
     top: -3px; }
 
 .entry-meta {
-  color: #2b2b2b;
+  color: #919191;
   font-size: 11px; }
   .entry-meta a {
-    color: #2b2b2b; }
+    color: #919191; }
 
 #post-list li {
   margin-bottom: .5rem; }
