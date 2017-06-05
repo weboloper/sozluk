@@ -1,23 +1,49 @@
 @import '_normalize.scss';
 
-$font-size-base: 13px !default;
+$font-size-base: 12px !default;
 $font-family-base: Verdana, Geneva, sans-serif !default;
 $font-weight-base: 400 !default;
 $font-antialiased: true !default;
 $line-height-base: 1.5 !default;
 $spacing-base: 1.5em !default;
 
+$base-bg: #dcdcdc;
+$text-color: #111;
+$link-color: #191989;
+$dark-bg: #636363;
+
 body {
 	font-family:  $font-family-base;
 	font-size:  $font-size-base;
 	line-height:  $line-height-base;
+    background-color: $base-bg;
+    color: $text-color;
+    margin: 0;
 }
 
-#container {
+a {
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover {
+         color: darken($link-color, 5%);
+    }
+}
+
+#container,
+#header-inner {
 	max-width: 1240px;
 	margin: 0 auto;
 }
 
+#header {
+    background-color: $dark-bg;
+    padding: .5rem;
+
+    a {
+        color: $base-bg;
+    }
+}
 #row {
 	display: -webkit-box;
     display: -webkit-flex;
@@ -43,9 +69,37 @@ body {
 
 #sol-frame {
 	    max-width: 30%;
+        margin-right: 2rem;
 
 }
 #content {
 	    max-width: 70%;
+}
 
+#entry-list {
+    padding: 0;
+    list-style: none;
+    li {
+        position: relative;
+    }
+    .vote {
+        position: absolute;
+        left: -1.5rem;
+        top:-3px;
+    }
+}
+.entry-meta {
+    color: lighten($text-color,10%);
+    font-size: 11px;
+
+    a {
+       color: lighten($text-color,10%);
+    }
+}
+
+#post-list {
+    li {
+        margin-bottom: .5rem;
+
+    }
 }
