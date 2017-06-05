@@ -1,0 +1,37 @@
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 13px;
+  line-height: 1.5; }
+
+#container {
+  max-width: 1240px;
+  margin: 0 auto; }
+
+#row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px; }
+
+#sol-frame,
+#content {
+  -webkit-flex-basis: 0;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1; }
+
+#sol-frame {
+  max-width: 30%; }
+
+#content {
+  max-width: 70%; }
+
+/*# sourceMappingURL=style.css.map */
