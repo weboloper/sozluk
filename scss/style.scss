@@ -6,6 +6,7 @@ $font-weight-base: 400 !default;
 $font-antialiased: true !default;
 $line-height-base: 1.5 !default;
 $spacing-base: 1.5em !default;
+$breakpoint-tablet: 768px;
 
 $base-bg: #ddd;
 $text-color: #000;
@@ -46,6 +47,12 @@ a {
         color: $base-bg;
     }
 }
+#logo {
+    font-weight: 600;
+}
+#menu-right {
+    float:right;
+}
 #row {
 	display: -webkit-box;
     display: -webkit-flex;
@@ -60,26 +67,47 @@ a {
 
 #sol-frame,
 #content {
-	-webkit-flex-basis: 0;
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
     padding: 0 15px;
 }
 
 #sol-frame {
-	max-width: 30%;
- 
-
+	width: 100%;
 
 }
 #content {
-	    max-width: 70%;
+	    width: 100%;
         
 }
+
+@media (min-width: $breakpoint-tablet) {
+
+    #logo ,
+    #menu-left {
+        float:left;
+        margin-right: 1rem;
+    }
+
+    #sol-frame,
+    #content {
+        -webkit-flex-basis: 0;
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -webkit-box-flex: 1;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        padding: 0 15px;
+    }
+    #sol-frame {
+        max-width: 30%;
+
+    }
+    #content {
+            max-width: 70%;
+            
+    }
+}
+
 
 #entry-list {
     padding-left: 2rem;
@@ -97,12 +125,14 @@ a {
     ul {
         list-style: none;
         position: relative;
-        color: lighten($text-color,25%);
-        margin-top: .5rem;
+        /*color: lighten($text-color,25%);*/
+        padding-top: 1rem;
         font-size: 12px;
+        border-left: 2px solid darken($base-bg,15%);
+        padding-left:20px;
+        margin-left:20px;
 
-
-        &:before {
+       /* &:before {
                 content: " ";
                 height: 100%;
                 width: 2px;
@@ -111,15 +141,21 @@ a {
                 display: block;
                 position: absolute;
                 top: 0;
-            }
+            }*/
 
         li {
+
+            margin: 0;
+            
+            & + li {
+                padding-top: 1rem;
+            }
 
             &:before {
                 content: " ";
                 height: 2px;
-                width: 20px;
-                left: -25px;
+                width: 17px;
+                left: -22px;
                 background-color: darken($base-bg,15%);
                 display: block;
                 position: absolute;
@@ -145,12 +181,13 @@ a {
 }
 .footer-links {
     color: lighten($text-color,50%);
+ 
     a {
         /*margin-right:1rem;*/
         color: lighten($text-color,50%);
         /*text-decoration: underline;*/
         font-size: 11px;
-        margin-bottom: 1rem;
+        
     }
 }
 
@@ -160,4 +197,24 @@ footer {
      text-align: center;
      border-top: 2px solid $dark-bg;
 
+}
+.collapse.show {
+    display: block;
+}
+ 
+.collapse {
+    display: none;
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height 0.35s ease;
+  -o-transition: height 0.35s ease;
+  transition: height 0.35s ease;
+}
+
+textarea {
+    width: 250px;
 }
