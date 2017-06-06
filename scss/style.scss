@@ -66,18 +66,12 @@ a {
 }
 
 #sol-frame,
-#content {
+#content,
+#content-full {
     padding: 0 15px;
+    width: 100%;
 }
-
-#sol-frame {
-	width: 100%;
-
-}
-#content {
-	    width: 100%;
-        
-}
+ 
 
 @media (min-width: $breakpoint-tablet) {
 
@@ -226,6 +220,7 @@ footer {
  
 .entry-form {
     max-width: 330px;
+    padding:10px;
 
     textarea {
         display: block;
