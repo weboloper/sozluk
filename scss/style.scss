@@ -1,6 +1,6 @@
 @import '_normalize.scss';
 
-$font-size-base: 12px !default;
+$font-size-base: 13px !default;
 $font-family-base: Verdana, Geneva, sans-serif !default;
 $font-weight-base: 400 !default;
 $font-antialiased: true !default;
@@ -35,6 +35,7 @@ a {
 #header-inner {
 	max-width: 1240px;
 	margin: 0 auto;
+    padding: 0 15px;
 }
 
 #header {
@@ -59,30 +60,33 @@ a {
 
 #sol-frame,
 #content {
-	    -webkit-flex-basis: 0;
+	-webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
     -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
+    padding: 0 15px;
 }
 
 #sol-frame {
-	    max-width: 30%;
-        margin-right: 2rem;
+	max-width: 30%;
+ 
+
 
 }
 #content {
 	    max-width: 70%;
+        
 }
 
 #entry-list {
-    padding: 0;
+    padding-left: 2rem;
     list-style: none;
     li {
         position: relative;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
     }
     .vote {
         position: absolute;
@@ -95,6 +99,8 @@ a {
         position: relative;
         color: lighten($text-color,25%);
         margin-top: .5rem;
+        font-size: 12px;
+
 
         &:before {
                 content: " ";
@@ -124,17 +130,27 @@ a {
     }
 }
 .entry-meta {
-    color: lighten($text-color,50%);
+    color: lighten($text-color,40%);
     font-size: 11px;
  
     a {
-       color: lighten($text-color,50%);
+       color: lighten($text-color,40%);
     }
 }
 
 #post-list {
     li {
         margin-bottom: .5rem;
+    }
+}
+.footer-links {
+    color: lighten($text-color,50%);
+    a {
+        /*margin-right:1rem;*/
+        color: lighten($text-color,50%);
+        /*text-decoration: underline;*/
+        font-size: 11px;
+        margin-bottom: 1rem;
     }
 }
 
