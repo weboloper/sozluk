@@ -41,10 +41,10 @@ a {
 
 #header {
     background-color: $dark-bg;
-    padding: .5rem;
+    padding: .25rem;
 
     a {
-        color: $base-bg;
+        color: $text-color;
     }
 }
 #logo {
@@ -172,7 +172,15 @@ a {
     a {
        color: lighten($text-color,40%);
     }
+
+    [data-toggle="collapse"]:before {
+        content: '[-]';
+    }
+    .collapsed:before {
+        content: '[+]';
+    }
 }
+
 
 #post-list {
     li {
@@ -215,6 +223,15 @@ footer {
   transition: height 0.35s ease;
 }
 
-textarea {
-    width: 250px;
+ 
+.entry-form {
+    max-width: 330px;
+
+    textarea {
+        display: block;
+        width: 100%;
+    }
+    pre {
+        margin: .25rem 0;
+    }
 }

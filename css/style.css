@@ -21,9 +21,9 @@ a {
 
 #header {
   background-color: #7b8b99;
-  padding: .5rem; }
+  padding: .25rem; }
   #header a {
-    color: #ddd; }
+    color: #000; }
 
 #logo {
   font-weight: 600; }
@@ -122,6 +122,10 @@ a {
   font-size: 11px; }
   .entry-meta a {
     color: #666666; }
+  .entry-meta [data-toggle="collapse"]:before {
+    content: '[-]'; }
+  .entry-meta .collapsed:before {
+    content: '[+]'; }
 
 #post-list li {
   margin-bottom: .5rem; }
@@ -154,7 +158,12 @@ footer {
   -o-transition: height 0.35s ease;
   transition: height 0.35s ease; }
 
-textarea {
-  width: 250px; }
+.entry-form {
+  max-width: 330px; }
+  .entry-form textarea {
+    display: block;
+    width: 100%; }
+  .entry-form pre {
+    margin: .25rem 0; }
 
 /*# sourceMappingURL=style.css.map */
