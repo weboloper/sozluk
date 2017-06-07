@@ -220,7 +220,10 @@ footer {
  
 .entry-form {
     max-width: 330px;
-    padding:10px;
+   
+   div {
+    padding: 10px;
+   }
 
     textarea {
         display: block;
