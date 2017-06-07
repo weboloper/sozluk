@@ -4,6 +4,8 @@ namespace Weboloper\Models;
 use Phalcon\Mvc\Model;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Uniqueness;
+use Weboloper\Models\Entries;
+use Weboloper\Models\Posts;
 
 /**
  * Weboloper\Models\Users
@@ -185,5 +187,9 @@ class Users extends Model
                 'message' => 'User cannot be deleted because he/she has activity in the system'
             ]
         ]);
+
+        $this->hasMany('id', Posts::class, 'usersId', ['alias' => 'posts', 'reusable' => true]);
+        $this->hasMany('id', Entries::class, 'usersId', ['alias' => 'entries', 'reusable' => true]);
+
     }
 }
