@@ -1,0 +1,16 @@
+{
+    "name": "weboloper/weboloper",
+    "description": "A multi-module Phalcon application (Acl, Auth, SecurityPlugin, Volt)",
+    "version": "1.0.0",
+    "keywords": [
+        "phalcon",
+        "framework",
+        "sample app",
+        "multi-module",
+        "weboloper"
+    ],
+     
+    "require": {
+        "swiftmailer/swiftmailer": "^5.4" 
+    } 
+}
