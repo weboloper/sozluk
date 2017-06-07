@@ -9,8 +9,7 @@
 
     <title>{{name}}</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="//v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
     
   </head>
 
@@ -18,14 +17,16 @@
 
     {{ partial('partials/header')}}
 
-    <div class="container">
-
+    <div id="container">
+        <div id="row">
         {{ flash.output() }}
 
         {% block content %}{% endblock %}
+        </div><!-- /.row -->
+        {{ partial('partials/footer')}}
     </div><!-- /.container -->
 
-    {{ partial('partials/footer')}}
+    
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
