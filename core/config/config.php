@@ -12,8 +12,8 @@ return new Config([
         'dbname' => 'aciksozluk'
     ],
     'application' => [
-        'name'           => 'Weboloper',
-        'slogan'         => 'Multi module Phalcon Framework project',
+        'name'           => 'Açık Sözlük',
+        'slogan'         => 'Phalcon PHP ile yazılmış açık kaynak kodlu sözlük projesi',
         'modelsDir'      => CORE_PATH . '/common/models/',
         'formsDir'       => CORE_PATH . '/common/forms/',
         'viewsDir'       => CORE_PATH . '/common/views/',
