@@ -162,6 +162,7 @@ footer {
     display: block;
     width: 100%; }
   .entry-form pre {
-    margin: .25rem 0; }
+    margin: .15rem 0;
+    font-size: 11px; }
 
 /*# sourceMappingURL=style.css.map */
