@@ -2,7 +2,7 @@
 
 error_reporting(E_ALL);
 
-(new Phalcon\Debug)->listen();
+// (new Phalcon\Debug)->listen();
 
 use Phalcon\Loader;
 use Phalcon\Mvc\Router;

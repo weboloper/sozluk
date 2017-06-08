@@ -48,7 +48,29 @@ $frontend->add('/:controller/:int', [
     'id'         => 2,
 ]);
 
+$frontend->add('/:controller/:int/{slug}', [
+    'controller' => 1,
+    'id'         => 2,
+    'slug'       => 3,
+    'action'     => 'view'
+]);
+
+$frontend->add('/posts/:int/{slug}', [
+    'controller' => 'posts',
+    'id'     => 1,
+    'slug'   => 2,
+    'action' => 'view'
+]);
+$frontend->add('/posts/:int', [
+    'controller' => 'posts',
+    'id'     => 1,
+    'slug'   => 2,
+    'action' => 'view'
+]);
+
 $router->mount($frontend);
+
+
 
 
 $backend = new RouterGroup([
