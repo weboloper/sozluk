@@ -3,12 +3,13 @@ namespace Weboloper\Models;
 
 use Phalcon\Mvc\Model;
 use Weboloper\Models\Users;
+use Weboloper\Models\ModelBase;
 
 /**
  * Weboloper\Models\Posts
  * All the users registered in the application
  */
-class Posts extends Model
+class Posts extends ModelBase
 {
 
 	const TYPE_POST        = 'post';

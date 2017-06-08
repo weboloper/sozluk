@@ -21,16 +21,13 @@ class EntryForm extends Form
         $content = new TextArea(
             'content',
             [
-                'placeholder' => t(
-                    'Use comments to ask for more information or suggest improvements. ' .
-                    'Avoid comments like "+1" or "thanks".'
-                )
+                'placeholder' =>  'emtry giriniz ' 
             ]
         );
         $content->addValidator(
             new PresenceOf(
                 [
-                    'message' => t('The content is required')
+                    'message' =>  'entry formu boş gönderilemez'
                 ]
             )
         );

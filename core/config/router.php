@@ -26,13 +26,13 @@ $router->setDefaultAction('show404');
 
 $router->add("/", [
     'module'     => 'frontend',
-    'controller' => 'index',
+    'controller' => 'posts',
     'action'     => 'index',
 ]);
 
 $frontend = new RouterGroup([
     'module'     => 'frontend',
-    'controller' => 'index',
+    'controller' => 'posts',
     'action'     => 'index',
     'namespace'  => 'Weboloper\Frontend\Controllers',
 ]);
@@ -67,6 +67,13 @@ $frontend->add('/posts/:int', [
     'slug'   => 2,
     'action' => 'view'
 ]);
+
+$frontend->add('/{slug:[a-z\-]+}--{id:[0-9]+}', [
+    'controller' => 'posts',
+    'id'     => 2,
+    'slug'   => 1,
+    'action' => 'view'
+])->setName('postView');
 
 $router->mount($frontend);
 

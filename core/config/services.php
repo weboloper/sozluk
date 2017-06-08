@@ -14,7 +14,7 @@ use Weboloper\Mail\Mail;
 use Weboloper\Plugins\Security\SecurityPlugin;
 use Weboloper\Plugins\Security\NotFoundPlugin;
 
- 
+ use Phalcon\Mvc\Model\Manager as ModelsManager;
 
 $di->setShared('config', function () {
     $config = include CORE_PATH . '/config/config.php';
@@ -131,3 +131,11 @@ $di->set(
     },
     true
 );
+
+
+// $di->set(
+//     "modelsManager",
+//     function() {
+//         return new ModelsManager();
+//     }
+// );
