@@ -21,7 +21,7 @@ class EntryForm extends Form
         $content = new TextArea(
             'content',
             [
-                'placeholder' =>  'emtry giriniz ' 
+                'placeholder' =>  'entry giriniz ' 
             ]
         );
         $content->addValidator(
@@ -32,8 +32,22 @@ class EntryForm extends Form
             )
         );
         $this->add($content);
-        $this->add(new Hidden('objectId'));
-        $this->add(new Hidden('objectTitle'));
+
+        $title = new Hidden(
+            'title' 
+        );
+        $title->addValidator(
+            new PresenceOf(
+                [
+                    'message' =>  'başlık yok?'
+                ]
+            )
+        );
+        $this->add($title);
+
+
+        $this->add(new Hidden('postId'));
+        $this->add(new Hidden('parentId'));
          
     }
 }

@@ -75,6 +75,14 @@ $frontend->add('/{slug:[a-z\-]+}--{id:[0-9]+}', [
     'action' => 'view'
 ])->setName('postView');
 
+
+$frontend->add('/entry/{id:[0-9]+}', [
+    'controller' => 'entries',
+    'id'     => 1,
+    'action' => 'view'
+])->setName('entryView');
+
+
 $router->mount($frontend);
 
 

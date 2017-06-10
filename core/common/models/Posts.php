@@ -41,7 +41,7 @@ class Posts extends ModelBase
      *
      * @var integer
      */
-    public $usersId;
+    public $userId;
 
     /**
      *
@@ -97,9 +97,9 @@ class Posts extends ModelBase
 
         return $this;
     }
-    public function setUsersId($usersId)
+    public function setUserId($userId)
     {
-        $this->usersId = $usersId;
+        $this->userId = $userId;
 
         return $this;
     }
@@ -152,9 +152,9 @@ class Posts extends ModelBase
     {
         return $this->slug;
     }
-    public function getUsersId()
+    public function getUserId()
     {
-        return $this->usersId;
+        return $this->userId;
     }
     public function getType()
     {
@@ -184,11 +184,12 @@ class Posts extends ModelBase
 
 
     public function beforeValidationOnCreate()
-    { 	
-    	$this->type     	= TYPE_POST;
-    	$this->status     	= STATUS_PUBLISHED;
+    { 	$this->createdAt  = time();
+        $this->modifiedAt = time();
+    	$this->type     	= self::TYPE_POST;
+    	$this->status     	= self::STATUS_PUBLISHED;
     	$this->deletedAt    = 0;
-    	$this->ipaddress 	= $this->getDI()->getRequest()->getClientAddress();
+    	$this->ipAddress 	= $this->di->getRequest()->getClientAddress();
     }
 
     public function beforeCreate()
@@ -204,7 +205,7 @@ class Posts extends ModelBase
 
     public function initialize()
     {
-    	$this->belongsTo('usersId', Users::class, 'id', ['alias' => 'user', 'reusable' => true]);
+    	$this->belongsTo('userId', Users::class, 'id', ['alias' => 'user', 'reusable' => true]);
     }
 
 }

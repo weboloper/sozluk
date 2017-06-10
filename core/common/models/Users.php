@@ -188,8 +188,8 @@ class Users extends Model
             ]
         ]);
 
-        $this->hasMany('id', Posts::class, 'usersId', ['alias' => 'posts', 'reusable' => true]);
-        $this->hasMany('id', Entries::class, 'usersId', ['alias' => 'entries', 'reusable' => true]);
+        $this->hasMany('id', Posts::class, 'userId', ['alias' => 'posts', 'reusable' => true]);
+        $this->hasMany('id', Entries::class, 'userId', ['alias' => 'entries', 'reusable' => true]);
 
     }
 }

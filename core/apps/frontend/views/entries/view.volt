@@ -6,6 +6,7 @@
 
 		 <ul id="entry-list">
 
+ 
 		 	{% for entry in entries %}
  		 	<li>
 		 		<a href="#" class="vote">▲</a>
@@ -17,16 +18,6 @@
 		 		</div>
 		 	</li>
 		 	{% endfor %}
-		 	 
-
-		 	{{ form( 'posts/entry/' ~ post.getId(), 'class' : 'entry-form'  ) }}
- 				{{ form.render('content',[ 'id' : 'entry-content', 'rows' : 4 ]) }}
- 				{{ form.render('postId', ['value' : post.getId() ]) }}
- 				{{ form.render('title', ['value' : post.getTitle() ]) }}
- 				<input type="hidden" name="<?= $this->security->getTokenKey() ?>" value="<?= $this->security->getToken() ?>">
- 				<pre>? biçimlendirme: [[bkz]] ((gbkz))</pre>
-				<button>ekle</button>
-			</form>
 		 	 
 		 </ul>
  

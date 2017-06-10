@@ -28,13 +28,25 @@ class Entries extends Model
      *
      * @var string
      */
-    public $body;
+    public $content;
 
     /**
      *
      * @var integer
      */
-    public $usersId;
+    public $postId;
+
+    /**
+     *
+     * @var integer
+     */
+    public $userId;
+
+    /**
+     *
+     * @var integer
+     */
+    public $parentId;
 
     /**
      *
@@ -78,15 +90,27 @@ class Entries extends Model
 
         return $this;
     }
-    public function setBody($body)
+    public function setContent($content)
     {
-        $this->body = $body;
+        $this->content = $content;
 
         return $this;
     }
-    public function setUsersId($usersId)
+    public function setPostId($postId)
     {
-        $this->usersId = $usersId;
+        $this->postId = $postId;
+
+        return $this;
+    }
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+    public function setParentId($parentId)
+    {
+        $this->parentId = $parentId;
 
         return $this;
     }
@@ -120,9 +144,9 @@ class Entries extends Model
 
         return $this;
     }
-    public function setIpaddress($ipaddress)
+    public function setIpAddress($ipAddress)
     {
-        $this->ipaddress = $ipaddress;
+        $this->ipAddress = $ipAddress;
 
         return $this;
     }
@@ -131,13 +155,21 @@ class Entries extends Model
     {
         return $this->id;
     }
-    public function getBody()
+    public function getContent()
     {
-        return $this->body;
+        return $this->content;
     }
-    public function getUsersId()
+    public function getPostId()
     {
-        return $this->usersId;
+        return $this->postId;
+    }
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+    public function getParentId()
+    {
+        return $this->parentId;
     }
     public function getType()
     {
@@ -160,18 +192,20 @@ class Entries extends Model
     {
         return $this->deletedAt;
     }
-    public function getIpaddress()
+    public function getIpAddress()
     {
-        return $this->ipaddress;
+        return $this->ipAddress;
     }
-
 
     public function beforeValidationOnCreate()
     { 	
-    	$this->type     	= TYPE_ENTRY;
-    	$this->status     	= STATUS_PUBLISHED;
+        $this->createdAt  = time();
+        $this->modifiedAt = time();
+        $this->parentId     = 0;
+    	$this->type     	= self::TYPE_ENTRY;
+    	$this->status     	= self::STATUS_PUBLISHED;
     	$this->deletedAt    = 0;
-    	$this->ipaddress 	= $this->getDI()->getRequest()->getClientAddress();
+    	$this->ipAddress 	= $this->di->getRequest()->getClientAddress();
     }
 
     public function beforeCreate()
@@ -187,8 +221,8 @@ class Entries extends Model
 
     public function initialize()
     {
-        $this->belongsTo('usersId', Users::class, 'id', ['alias' => 'user', 'reusable' => true]);
-    	$this->belongsTo('postsId', Posts::class, 'id', ['alias' => 'post', 'reusable' => true]);
+        $this->belongsTo('userId', Users::class, 'id', ['alias' => 'user', 'reusable' => true]);
+    	$this->belongsTo('postId', Posts::class, 'id', ['alias' => 'post', 'reusable' => true]);
     }
 
 }

@@ -13,6 +13,8 @@ use Weboloper\Auth\Auth;
 use Weboloper\Mail\Mail;
 use Weboloper\Plugins\Security\SecurityPlugin;
 use Weboloper\Plugins\Security\NotFoundPlugin;
+use Phalcon\Http\Request;
+
 
  use Phalcon\Mvc\Model\Manager as ModelsManager;
 
@@ -139,3 +141,11 @@ $di->set(
 //         return new ModelsManager();
 //     }
 // );
+
+// Using an anonymous function
+$di->setShared(
+    "request",
+    function () {
+        return new Request();
+    }
+);
