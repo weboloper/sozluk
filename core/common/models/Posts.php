@@ -208,4 +208,20 @@ class Posts extends ModelBase
     	$this->belongsTo('userId', Users::class, 'id', ['alias' => 'user', 'reusable' => true]);
     }
 
+
+    public static function getNewPosts($limit = 7)
+    {
+        $status = self::STATUS_PUBLISHED;
+        $posts  = Posts::query()
+            ->where("status = '{$status}'")
+            ->orderBy('modifiedAt DESC')
+            ->limit($limit)
+            ->execute();
+        if ($posts->valid()) {
+            return $posts;
+        }
+        return false;
+    }
+
+
 }

@@ -115,7 +115,7 @@ class PostsController extends ControllerBase
             $itemBuilder->offset($offset);
         }
 
-      
+       
         $this->view->setVars(
             [
                 'post'        => $post,
@@ -127,8 +127,7 @@ class PostsController extends ControllerBase
 
             ]
         );
-        $this->tag->setTitle($this->escaper->escapeHtml($post->getTitle()));
-     }
+      }
 
 
     public function entryAction($id = null )

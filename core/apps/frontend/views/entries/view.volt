@@ -5,8 +5,6 @@
 		<h1>{{ link_to( ["for": "postView", "slug":  post.getSlug(), "id" : post.getId()   ], post.getTitle() ) }}</h1>
 
 		 <ul id="entry-list">
-
- 
 		 	{% for entry in entries %}
  		 	<li>
 		 		<a href="#" class="vote">▲</a>
@@ -14,7 +12,7 @@
 		 		<div id="entry-{{entry.getId()}}" class="collapse show">
 			 		<div class="entry-content">{{ entry.getContent()}}
 			 		</div>
-			 		<div class="entry-footer"><div class="footer-links"><a href="#">bildir</a></div></div>
+			 		<div class="entry-footer"><div class="footer-links">{% if auth['id'] == entry.getUserId() %} <a href="/entries/edit/{{entry.getId()}}">düzenle</a> -|{% endif %} <a href="#">bildir</a></div></div>
 		 		</div>
 		 	</li>
 		 	{% endfor %}

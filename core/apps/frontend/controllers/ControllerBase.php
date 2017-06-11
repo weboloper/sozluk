@@ -5,9 +5,14 @@ namespace Weboloper\Frontend\Controllers;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
 
+// use Weboloper\Models\Services\Service;
+use Weboloper\Models\Posts;
+
 class ControllerBase extends Controller
 {
      
+     protected $postService;
+
      /**
      * Execute before the router so we can determine if this is a private controller, and must be authenticated, or a
      * public controller that is open to all.
@@ -51,10 +56,33 @@ class ControllerBase extends Controller
             'action'        => $this->router->getActionName(),
             'controller'    => $this->router->getControllerName(),
             'baseUri'       => $this->config->application->baseUri ,
-            // 'googleAnalytic'=> $this->config->googleAnalytic
+            'feeds'         => self::getFeed()
 
         ]);
     }
+ 
+    // public function inject(Service\Post $postService)
+    // {
+    //     $this->postService = $postService;
+
+    // }
 
 
+    public function getFeed()
+    {
+        $solframe = ($this->session->has('solframe')) ? $this->session->get('solframe') : 'new';
+        $perPage = 5;
+
+
+        switch ($solframe) {
+            case 'hot':
+                # code...
+                break;
+            
+            default:
+                # new...
+                return Posts::getNewPosts();
+                break;
+        }
+    }
 }
