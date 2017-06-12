@@ -29,6 +29,11 @@ $router->add("/", [
     'controller' => 'posts',
     'action'     => 'index',
 ]);
+$router->add("/{feed:(yeni)}", [
+    'module'     => 'frontend',
+    'controller' => 'posts',
+    'action'     => 'index',
+]);
 
 $frontend = new RouterGroup([
     'module'     => 'frontend',

@@ -68,21 +68,28 @@ class ControllerBase extends Controller
     // }
 
 
-    public function getFeed()
+    public function getFeed($page = 1)
     {
-        $solframe = ($this->session->has('solframe')) ? $this->session->get('solframe') : 'new';
-        $perPage = 5;
+        $solframe = ($this->session->has('solframe')) ? $this->session->get('solframe') : 'hot';
 
+        $limit = 5;
+        $offset     = ($page - 1) * $limit + 1;
 
         switch ($solframe) {
             case 'hot':
                 # code...
+                return Posts::getHotPosts($limit, $offset);
                 break;
             
             default:
                 # new...
-                return Posts::getNewPosts();
+                return Posts::getNewPosts($limit, $offset);
                 break;
         }
+    }
+
+    public function moreAction()
+    {
+        return self::getFeed(2);
     }
 }

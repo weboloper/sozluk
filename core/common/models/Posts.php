@@ -209,19 +209,36 @@ class Posts extends ModelBase
     }
 
 
-    public static function getNewPosts($limit = 7)
+    public static function getNewPosts($limit = 7, $offset = 0 )
     {
         $status = self::STATUS_PUBLISHED;
         $posts  = Posts::query()
             ->where("status = '{$status}'")
             ->orderBy('modifiedAt DESC')
-            ->limit($limit)
+            ->limit($limit, $offset)
             ->execute();
         if ($posts->valid()) {
             return $posts;
         }
         return false;
     }
+
+
+    public static function getHotPosts($limit = 7, $offset = 0 )
+    {
+        $status = self::STATUS_PUBLISHED;
+        $posts  = Posts::query()
+            ->join(__NAMESPACE__ . "\Entries", "e.postId =  " . __NAMESPACE__ . "\Posts.id", "e", "LEFT")
+            // ->where("status = '{$status}'")
+            ->orderBy('e.modifiedAt DESC')
+            ->limit($limit, $offset)
+            ->execute();
+        if ($posts->valid()) {
+            return $posts;
+        }
+        return false;
+    }
+
 
 
 }

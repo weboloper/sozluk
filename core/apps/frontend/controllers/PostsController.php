@@ -12,6 +12,16 @@ class PostsController extends ControllerBase
 
     public function indexAction()
     {
+       
+        $feed = $this->dispatcher->getParam("feed");
+
+        if($feed == 'yeni')
+        {
+             $this->session->set('solframe', 'yeni');
+        }else {
+             $this->session->set('solframe', 'hot');
+        }
+
         $s = $this->request->get("s", "trim");
 
         if($s != null) {
@@ -77,7 +87,7 @@ class PostsController extends ControllerBase
         
 
     }
-    
+
 
     public function viewAction($id, $slug = null )
     {
@@ -204,5 +214,7 @@ class PostsController extends ControllerBase
 
 
     }
+
+
 
 }

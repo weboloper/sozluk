@@ -9,7 +9,7 @@
 		 	{% for entry in entries %}
  		 	<li>
 		 		<a href="#" class="vote">▲</a>
-		 		<div class="entry-meta"><a href="#">{{ entry.user.username }}</a> - {{ date('h:m:i d/m/Y', entry.createdAt )}} - <a data-toggle="collapse" href="#entry-{{entry.getId()}}" aria-expanded="false" aria-controls="entry-{{entry.getId()}}"><span></span></a></div>
+		 		<div class="entry-meta"><a href="/user/{{ entry.user.id }}">{{ entry.user.username }}</a> - {{ date('h:m:i d/m/Y', entry.createdAt )}} - <a data-toggle="collapse" href="#entry-{{entry.getId()}}" aria-expanded="false" aria-controls="entry-{{entry.getId()}}"><span></span></a></div>
 		 		<div id="entry-{{entry.getId()}}" class="collapse show">
 			 		<div class="entry-content">{{ entry.getContent()}}
 			 		</div>
