@@ -17,7 +17,7 @@ class PostsController extends ControllerBase
 
         if($feed == 'yeni')
         {
-             $this->session->set('solframe', 'yeni');
+             $this->session->set('solframe', 'new');
         }else {
              $this->session->set('solframe', 'hot');
         }

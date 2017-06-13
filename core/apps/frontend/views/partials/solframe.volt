@@ -9,5 +9,5 @@
 			{% endfor %}
 		{% endif %}
 	</ol>
-	<a id="more" href="/more?page=2">daha...</a>
+	<a id="more" data-page="2" href="#">daha...</a>
 </aside>

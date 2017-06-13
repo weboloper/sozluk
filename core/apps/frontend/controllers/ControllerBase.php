@@ -61,35 +61,44 @@ class ControllerBase extends Controller
         ]);
     }
  
-    // public function inject(Service\Post $postService)
-    // {
-    //     $this->postService = $postService;
-
-    // }
-
 
     public function getFeed($page = 1)
-    {
-        $solframe = ($this->session->has('solframe')) ? $this->session->get('solframe') : 'hot';
+    {        
+
+        $route = $this->router->getRewriteUri();
+
+        switch ($route) {
+            case '/yeni':
+                $solframe = 'new';
+                break;
+            case '/':
+                $solframe = 'hot';
+                break;
+            default:
+                $solframe = ($this->session->has('solframe')) ? $this->session->get('solframe') : 'hot';
+                break;
+        }
 
         $limit = 5;
         $offset     = ($page - 1) * $limit + 1;
 
         switch ($solframe) {
-            case 'hot':
+            case 'new':
                 # code...
-                return Posts::getHotPosts($limit, $offset);
+                return Posts::getNewPosts($limit, $offset);
                 break;
             
             default:
                 # new...
-                return Posts::getNewPosts($limit, $offset);
+                return Posts::getHotPosts($limit, $offset);
                 break;
         }
     }
 
-    public function moreAction()
+    public function more()
     {
         return self::getFeed(2);
     }
+
+
 }
