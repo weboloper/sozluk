@@ -224,7 +224,7 @@ class Posts extends ModelBase
     }
 
 
-    public static function getHotPosts($limit = 7, $offset = 0 )
+    public static function getNewPostsByEntries($limit = 7, $offset = 0 )
     {
         $status = self::STATUS_PUBLISHED;
         $posts  = Posts::query()

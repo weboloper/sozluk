@@ -6,11 +6,11 @@ $(document).ready(function(){
         var page = $(this).attr("data-page");
         
         $.ajax({
-            url: "/more",
+            url: "/posts/more",
             type:'POST',
             dataType: 'json',
             success: function(data) {
-                page = page+1;
+                page = page +1;
                 $('this').attr('data-page', page);
                 console.log(data);
             }

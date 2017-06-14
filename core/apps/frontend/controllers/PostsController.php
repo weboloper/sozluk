@@ -15,11 +15,11 @@ class PostsController extends ControllerBase
        
         $feed = $this->dispatcher->getParam("feed");
 
-        if($feed == 'yeni')
+        if($feed == 'newposts')
         {
-             $this->session->set('solframe', 'new');
+             $this->session->set('solframe', 'newposts');
         }else {
-             $this->session->set('solframe', 'hot');
+             $this->session->set('solframe', 'newentries');
         }
 
         $s = $this->request->get("s", "trim");

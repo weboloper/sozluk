@@ -68,14 +68,17 @@ class ControllerBase extends Controller
         $route = $this->router->getRewriteUri();
 
         switch ($route) {
-            case '/yeni':
-                $solframe = 'new';
+            case '/newposts':
+                $solframe = 'newposts';
                 break;
             case '/':
-                $solframe = 'hot';
+                $solframe = 'newentries';
+                break;
+            case '/newentries':
+                $solframe = 'newentries';
                 break;
             default:
-                $solframe = ($this->session->has('solframe')) ? $this->session->get('solframe') : 'hot';
+                $solframe = ($this->session->has('solframe')) ? $this->session->get('solframe') : 'newentries';
                 break;
         }
 
@@ -83,21 +86,31 @@ class ControllerBase extends Controller
         $offset     = ($page - 1) * $limit + 1;
 
         switch ($solframe) {
-            case 'new':
+            case 'newposts':
                 # code...
                 return Posts::getNewPosts($limit, $offset);
                 break;
             
             default:
                 # new...
-                return Posts::getHotPosts($limit, $offset);
+                return Posts::getNewPostsByEntries($limit, $offset);
                 break;
         }
     }
 
-    public function more()
-    {
-        return self::getFeed(2);
+    public function moreAction()
+    {   
+        
+
+        
+        $response = new \Phalcon\Http\Response();
+        $more = self::getFeed(2);
+
+        $this->view->feeds = $more;
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
+        return  $this->view->pick("partials/more");
+        // return $response->setContent(json_encode( $more));
+ 
     }
 
 

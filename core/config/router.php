@@ -29,7 +29,7 @@ $router->add("/", [
     'controller' => 'posts',
     'action'     => 'index',
 ]);
-$router->add("/{feed:(yeni)}", [
+$router->add("/{feed:(newposts|newentries)}", [
     'module'     => 'frontend',
     'controller' => 'posts',
     'action'     => 'index',
