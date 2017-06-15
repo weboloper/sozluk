@@ -232,6 +232,7 @@ class Posts extends ModelBase
             // ->where("status = '{$status}'")
             ->orderBy('e.modifiedAt DESC')
             ->limit($limit, $offset)
+            ->groupBy(  __NAMESPACE__ . "\Posts.id" )
             ->execute();
         if ($posts->valid()) {
             return $posts;

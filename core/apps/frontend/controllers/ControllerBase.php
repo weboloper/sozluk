@@ -100,13 +100,20 @@ class ControllerBase extends Controller
 
     public function moreAction()
     {   
-        
+
+        if (!$this->request->isPost() ) {
+            return $this->response->redirect('/');
+        }
 
         
-        $response = new \Phalcon\Http\Response();
-        $more = self::getFeed(2);
 
-        $this->view->feeds = $more;
+        $page = $this->request->getPost("page");
+
+        
+        // $response = new \Phalcon\Http\Response();
+        $feeds = self::getFeed($page);
+ 
+        $this->view->setVars(['feeds' => $feeds ]);
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
         return  $this->view->pick("partials/more");
         // return $response->setContent(json_encode( $more));

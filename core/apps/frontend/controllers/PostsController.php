@@ -217,4 +217,60 @@ class PostsController extends ControllerBase
 
 
 
+    public function ajaxAction($id, $slug = null )
+    {
+
+        // $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
+        $page    = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $post = Posts::findFirstById($id);
+
+        if (!$post) {
+            $this->response->setStatusCode(404);
+            $this->flashSession->error("Sorry! We can't seem to find the page you're looking for.");
+            $this->dispatcher->forward([
+                'controller' => 'error',
+                'action'     => 'show404',
+            ]);
+            return;
+        }
+
+        $perPage = 15;
+        $params = null;
+        list($itemBuilder, $totalBuilder) =
+                ModelBase::prepareQueriesEntries('', false, $perPage);
+
+        $type   = Entries::TYPE_ENTRY;
+        $status = Entries::STATUS_PUBLISHED;
+        $conditions = "e.postId = ?0 AND e.deletedAt = 0 AND e.type  = '{$type}' AND e.status = '{$status}'";
+        $params = array($post->id);
+        $itemBuilder->andWhere($conditions);
+        $totalBuilder->andWhere($conditions);
+
+        $totalEntries= $totalBuilder->getQuery()->setUniqueRow(true)->execute($params);
+        $totalPages = ceil($totalEntries->count / $perPage);
+
+        $offset     = ($page - 1) * $perPage + 1;
+        if ($page > 1) {
+            $itemBuilder->offset($offset);
+        }
+
+       
+        $this->view->setVars(
+            [
+                'post'        => $post,
+                'form'        => new EntryForm(),
+                'entries'     => $itemBuilder->getQuery()->execute($params),
+                'totalPages'  => $totalPages,
+                'currentPage' => $page,
+
+
+            ]
+        );
+
+         $this->view->pick('partials/post');
+
+      }
+
+
+
 }
