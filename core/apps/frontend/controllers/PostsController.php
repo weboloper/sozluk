@@ -91,7 +91,7 @@ class PostsController extends ControllerBase
 
     public function viewAction($id, $slug = null )
     {
-
+ 
         $page    = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $post = Posts::findFirstById($id);
 

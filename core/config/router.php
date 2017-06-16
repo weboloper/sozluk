@@ -73,7 +73,7 @@ $frontend->add('/posts/:int', [
     'action' => 'view'
 ]);
 
-$frontend->add('/{slug:[a-z\-]+}--{id:[0-9]+}', [
+$frontend->add('/{slug:[a-z0-9\-]+}--{id:[0-9]+}', [
     'controller' => 'posts',
     'id'     => 2,
     'slug'   => 1,
