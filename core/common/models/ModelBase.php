@@ -53,13 +53,11 @@ class ModelBase extends Model
         if (isset($where)) {
             $itemBuilder->where($where);
         }
-        $totalBuilder = clone $itemBuilder;
         $itemBuilder
             ->columns(array('p.*'))
             ->limit($limit);
-        $totalBuilder
-            ->columns('COUNT(*) AS count');
-        return array($itemBuilder, $totalBuilder);
+       
+        return array($itemBuilder );
     }
 
 
