@@ -20,7 +20,7 @@ class SignUpForm extends Form
     public function initialize($entity = null, $options = null)
     {
         $name = new Text('name', [
-            'placeholder' => 'Name',
+            'placeholder' => 'isim',
             'class' => 'form-control'
         ]);
 
@@ -36,7 +36,7 @@ class SignUpForm extends Form
 
         // Username
         $username = new Text('username', [
-            'placeholder' => 'Username',
+            'placeholder' => 'kullanıcı adı',
             'class' => 'form-control'
         ]);
 
@@ -44,7 +44,7 @@ class SignUpForm extends Form
 
         $username->addValidators([
             new PresenceOf([
-                'message' => 'Username is required'
+                'message' => 'kullanıcı adı is required'
             ]),
             new Alnum([
                 'message' => ':field must contain only alphanumeric characters'
@@ -60,7 +60,7 @@ class SignUpForm extends Form
             'class' => 'form-control'
         ]);
 
-        $email->setLabel('E-mail');
+        $email->setLabel('email');
 
         $email->addValidators([
             new PresenceOf([
@@ -75,7 +75,7 @@ class SignUpForm extends Form
 
         // Password
         $password = new Password('password', [
-            'placeholder' => 'Password',
+            'placeholder' => 'şifre',
             'class' => 'form-control'
         ]);
 
@@ -99,7 +99,7 @@ class SignUpForm extends Form
 
         // Confirm Password
         $confirmPassword = new Password('confirmPassword', [
-            'placeholder' => 'Confirm Password',
+            'placeholder' => 'şifre bi daha',
             'class' => 'form-control'
         ]);
 
@@ -118,7 +118,7 @@ class SignUpForm extends Form
             'value' => 'yes'
         ]);
 
-        $terms->setLabel('Terms and conditions');
+        $terms->setLabel('kurallar koşullar falan');
 
         $terms->addValidator(new Identical([
             'value' => 'yes',

@@ -24,7 +24,7 @@
 			    	    </div>
 			    		 <input type="hidden" name="{{ security.getTokenKey() }}" value="{{ security.getToken() }}" >
 
-			    		 {{ submit_button('Giriş yap', 'class' : 'btn btn-success') }}
+			    		 {{ submit_button('gir', 'class' : 'btn btn-success') }}
 			    	</fieldset>
 			    	
 			      	</form>

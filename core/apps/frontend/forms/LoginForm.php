@@ -18,7 +18,7 @@ class LoginForm extends Form
     {
         // Email
         $email = new Text('email', [
-            'placeholder' => 'E-mail',
+            'placeholder' => 'email',
             'class' => 'form-control'
         ]);
 
@@ -35,7 +35,7 @@ class LoginForm extends Form
 
         // Password
         $password = new Password('password', [
-            'placeholder' => 'Password',
+            'placeholder' => 'şifre',
             'class' => 'form-control'
         ]);
 
@@ -52,7 +52,7 @@ class LoginForm extends Form
             'value' => 'yes',
         ]);
 
-        $remember->setLabel('Remember me');
+        $remember->setLabel('bi daha gelirim');
 
         $this->add($remember);
 

@@ -25,7 +25,7 @@ class UsersForm extends Form
         $this->add($id);
 
         $name = new Text('name', [
-            'placeholder' => 'Name'
+            'placeholder' => 'isim'
         ]);
 
         $name->addValidators([
@@ -37,7 +37,7 @@ class UsersForm extends Form
         $this->add($name);
 
         $email = new Text('email', [
-            'placeholder' => 'Email'
+            'placeholder' => 'email'
         ]);
 
         $email->addValidators([
