@@ -30,7 +30,8 @@
 			      	</form>
 			    </div>
 			    <div class="card-footer text-muted">
-			    	{{ link_to("session/forgotPassword", "Şifremi unuttum") }}
+			    	{{ link_to("session/signup", "kaydol") }} | 
+			    	{{ link_to("session/forgotPassword", "şifre gitti") }}
 			    </div>
 			</div>
 		</div>

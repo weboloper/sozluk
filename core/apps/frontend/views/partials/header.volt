@@ -13,7 +13,10 @@
           <a href="/session/logout">çık</a>
       {% endif %}
     </div>
-    <div id="menu-left"><a href="/">son entryler</a> | <a href="/newposts">yeni başlıklar</a></div>
+    <div id="menu-left">
+        <div class="visible-lg"><a href="/">son entryler</a> | <a href="/newposts">yeni başlıklar</a> </div>
+        <div class="hidden-lg"><a href="/posts/newentries">son entryler</a> | <a href="/posts/newposts">yeni başlıklar</a> </div>
+    </div>
     <form id="search-form" action="/"><input name="s" type="text" placeholder="getirir"><button type="submit">getir</button></form>
   </div>
 </header>

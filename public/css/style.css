@@ -13,6 +13,9 @@ a {
   a:hover {
     color: #151573; }
 
+form fieldset {
+  border: none; }
+
 #container,
 #header-inner {
   max-width: 1240px;
@@ -48,6 +51,9 @@ a {
   padding: 0 15px;
   width: 100%; }
 
+.visible-lg {
+  display: none; }
+
 @media (min-width: 768px) {
   #logo,
   #menu-left {
@@ -66,10 +72,16 @@ a {
     padding: 0 15px; }
 
   #sol-frame {
-    max-width: 30%; }
+    max-width: 25%; }
 
   #content {
-    max-width: 70%; } }
+    max-width: 75%; }
+
+  .hidden-lg {
+    display: none; }
+
+  .visible-lg {
+    display: block; } }
 #entry-list {
   padding-left: 2rem;
   list-style: none; }
@@ -123,7 +135,7 @@ a {
   .entry-meta .collapsed:before {
     content: '[+]'; }
 
-#post-list li {
+#post-list li, #post-list-mobile li {
   margin-bottom: .5rem; }
 
 .footer-links {

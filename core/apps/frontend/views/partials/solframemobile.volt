@@ -1,5 +1,5 @@
-<aside id="sol-frame" class="visible-lg">
-	<ol id="post-list" class="not-mobile">
+<aside id="sol-frame">
+	<ol id="post-list" class="mobile">
 		{% if not(feeds is empty ) %}
 			{% for feed in feeds %}
 			<li>

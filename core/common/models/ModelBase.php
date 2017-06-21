@@ -45,7 +45,7 @@ class ModelBase extends Model
          */
         $itemBuilder = self::getBuilder()
             ->from(['p' => Posts::class])
-            ->orderBy('p.createdAt ASC');
+            ->orderBy('p.createdAt DESC');
         if (isset($join) && is_array($join)) {
             $type = (string) $join['type'];
             $itemBuilder->$type($modelNamespace . $join['model'], $join['on'], $join['alias']);
@@ -54,10 +54,10 @@ class ModelBase extends Model
             $itemBuilder->where($where);
         }
         $itemBuilder
-            ->columns(array('p.*'))
+            ->columns(array('p.* '))
             ->limit($limit);
        
-        return array($itemBuilder );
+        return $itemBuilder;
     }
 
 

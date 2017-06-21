@@ -216,6 +216,15 @@ class PostsController extends ControllerBase
     }
 
 
+    public function newpostsAction()
+    {   
+
+    }
+
+    public function newentriesAction()
+    {  
+        
+    }
 
     public function ajaxAction($id, $slug = null )
     {

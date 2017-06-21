@@ -50,6 +50,7 @@ $frontend->add('/:controller/:action/:params', [
 
 $frontend->add('/:controller/:int', [
     'controller' => 1,
+    'action' => 'view',
     'id'         => 2,
 ]);
 
@@ -66,12 +67,12 @@ $frontend->add('/posts/:int/{slug}', [
     'slug'   => 2,
     'action' => 'view'
 ]);
-$frontend->add('/posts/:int', [
-    'controller' => 'posts',
-    'id'     => 1,
-    'slug'   => 2,
-    'action' => 'view'
-]);
+// $frontend->add('/posts/:int', [
+//     'controller' => 'posts',
+//     'id'     => 1,
+//     'slug'   => 2,
+//     'action' => 'view'
+// ]);
 
 $frontend->add('/{slug:[a-z0-9\-]+}--{id:[0-9]+}', [
     'controller' => 'posts',

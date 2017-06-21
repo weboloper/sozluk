@@ -19,7 +19,7 @@ class UsersController extends ControllerBase
     {
     }
 
-     
+    
     /**
      * Users must use this action to change its password
      */
@@ -58,5 +58,33 @@ class UsersController extends ControllerBase
         }
 
         $this->view->form = $form;
+    }
+
+
+
+    public function viewAction($id)
+    {
+        $user = Users::findFirst($id);
+
+        if (!$user) {
+            $this->response->setStatusCode(404);
+            $this->flashSession->error("Sorry! We can't seem to find the page you're looking for.");
+            $this->dispatcher->forward([
+                'controller' => 'error',
+                'action'     => 'show404',
+            ]);
+            return;
+        }
+
+        $this->view->setVars(
+            [
+ 
+                'user'     => $user 
+
+
+            ]
+        );
+
+
     }
 }

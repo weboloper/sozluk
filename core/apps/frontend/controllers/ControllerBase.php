@@ -7,6 +7,7 @@ use Phalcon\Mvc\Dispatcher;
 
 // use Weboloper\Models\Services\Service;
 use Weboloper\Models\Posts;
+use Weboloper\Models\ModelBase;
 
 class ControllerBase extends Controller
 {
@@ -71,10 +72,16 @@ class ControllerBase extends Controller
             case '/newposts':
                 $solframe = 'newposts';
                 break;
+            case '/posts/newposts':
+                $solframe = 'newposts';
+                break;
             case '/':
                 $solframe = 'newentries';
                 break;
             case '/newentries':
+                $solframe = 'newentries';
+                break;
+            case '/posts/newentries':
                 $solframe = 'newentries';
                 break;
             default:
@@ -82,20 +89,52 @@ class ControllerBase extends Controller
                 break;
         }
 
-        $limit = 5;
-        $offset     = ($page - 1) * $limit + 1;
+        
+        $perPage = 25;
 
-        switch ($solframe) {
-            case 'newposts':
-                # code...
-                return Posts::getNewPosts($limit, $offset);
-                break;
-            
-            default:
-                # new...
-                return Posts::getNewPostsByEntries($limit, $offset);
-                break;
+        if($solframe == 'newentries')
+        {   
+            $join = [
+                'type'  => 'leftjoin',
+                'model' => 'Entries',
+                'on'    => 'e.postId = p.id',
+                'alias' => 'e'
+
+            ];
+            $itemBuilder = ModelBase::prepareQueriesPosts( $join, false, $perPage);
+            $itemBuilder->orderBy('max(e.modifiedAt) DESC');
+            $itemBuilder->groupBy(array('p.id'));
+          
+        }else {
+            $itemBuilder = ModelBase::prepareQueriesPosts('', false, $perPage);
         }
+        
+        $type   = Posts::TYPE_POST;
+        $status = Posts::STATUS_PUBLISHED;
+        $conditions = "p.type  = '{$type}' AND p.status = '{$status}'";
+        $itemBuilder->where($conditions);
+
+        $offset     = ($page - 1) * $perPage + 1;
+        if ($page > 1) {
+            $itemBuilder->offset($offset);
+        }
+        return $itemBuilder->getQuery()->execute();
+
+        // NOT IN USE ANYMORE
+        // $limit = 5;
+        // $offset     = ($page - 1) * $limit + 1;
+
+        // switch ($solframe) {
+        //     case 'newposts':
+        //         # code...
+        //         return Posts::getNewPosts($limit, $offset);
+        //         break;
+            
+        //     default:
+        //         # new...
+        //         // return Posts::getNewPostsByEntries($limit, $offset);
+        //         break;
+        // }
     }
 
     public function moreAction()

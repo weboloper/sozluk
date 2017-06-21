@@ -22,7 +22,7 @@ $("#more").click(function(e){
     })   
 }); 
 
-$('#post-list').on('click', '.solframe-link', function (e){
+$('#post-list.not-mobile').on('click', '.solframe-link', function (e){
  
     e.preventDefault();
     var href =   $(this).attr("href") ;

@@ -208,37 +208,37 @@ class Posts extends ModelBase
     	$this->belongsTo('userId', Users::class, 'id', ['alias' => 'user', 'reusable' => true]);
     }
 
+    // NOT IN USE ANYMORE
+    // public static function getNewPosts($limit = 7, $offset = 0 )
+    // {
+    //     $status = self::STATUS_PUBLISHED;
+    //     $posts  = Posts::query()
+    //         ->where("status = '{$status}'")
+    //         ->orderBy('modifiedAt DESC')
+    //         ->limit($limit, $offset)
+    //         ->execute();
+    //     if ($posts->valid()) {
+    //         return $posts;
+    //     }
+    //     return false;
+    // }
 
-    public static function getNewPosts($limit = 7, $offset = 0 )
-    {
-        $status = self::STATUS_PUBLISHED;
-        $posts  = Posts::query()
-            ->where("status = '{$status}'")
-            ->orderBy('modifiedAt DESC')
-            ->limit($limit, $offset)
-            ->execute();
-        if ($posts->valid()) {
-            return $posts;
-        }
-        return false;
-    }
 
-
-    public static function getNewPostsByEntries($limit = 7, $offset = 0 )
-    {
-        $status = self::STATUS_PUBLISHED;
-        $posts  = Posts::query()
-            ->join(__NAMESPACE__ . "\Entries", "e.postId =  " . __NAMESPACE__ . "\Posts.id", "e", "LEFT")
-            // ->where("status = '{$status}'")
-            ->orderBy('e.modifiedAt DESC')
-            ->limit($limit, $offset)
-            ->groupBy(  __NAMESPACE__ . "\Posts.id" )
-            ->execute();
-        if ($posts->valid()) {
-            return $posts;
-        }
-        return false;
-    }
+    // public static function getNewPostsByEntries($limit = 7, $offset = 0 )
+    // {
+    //     $status = self::STATUS_PUBLISHED;
+    //     $posts  = Posts::query()
+    //         ->join(__NAMESPACE__ . "\Entries", "e.postId =  " . __NAMESPACE__ . "\Posts.id", "e", "LEFT")
+    //         // ->where("status = '{$status}'")
+    //         ->orderBy('e.modifiedAt DESC')
+    //         ->limit($limit, $offset)
+    //         ->groupBy(  __NAMESPACE__ . "\Posts.id" )
+    //         ->execute();
+    //     if ($posts->valid()) {
+    //         return $posts;
+    //     }
+    //     return false;
+    // }
 
 
 
