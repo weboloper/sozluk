@@ -23,18 +23,18 @@ class ModelBase extends Model
         return $di->get('modelsManager')->createBuilder();
     }
 
-    public function getEntries($postsId, $type)
-    {
-        $resultset = $this->getBuilder()
-            ->from(array('e' => __NAMESPACE__ . '\Entries'))
-            ->join( __NAMESPACE__ . '\Users', "u.id= e.usersId", 'u')
-            ->columns(['e.id, e.content, e.usersId, e.createdAt, u.username '])
-            ->where('postsId = :postsId:')
-            ->andWhere('type = :type:')
-            ->getQuery()
-            ->execute(['type' => $type, 'postsId' => $postsId])->toArray();
-        return $resultset;
-    }
+    // public function getEntries($postsId, $type)
+    // {
+    //     $resultset = $this->getBuilder()
+    //         ->from(array('e' => __NAMESPACE__ . '\Entries'))
+    //         ->join( __NAMESPACE__ . '\Users', "u.id= e.usersId", 'u')
+    //         ->columns(['e.id, e.content, e.usersId, e.createdAt, u.username '])
+    //         ->where('postsId = :postsId:')
+    //         ->andWhere('type = :type:')
+    //         ->getQuery()
+    //         ->execute(['type' => $type, 'postsId' => $postsId])->toArray();
+    //     return $resultset;
+    // }
 
     public static function prepareQueriesPosts($join, $where, $limit = 15)
     {
@@ -54,7 +54,7 @@ class ModelBase extends Model
             $itemBuilder->where($where);
         }
         $itemBuilder
-            ->columns(array('p.* '))
+            ->columns(array('p.*'))
             ->limit($limit);
        
         return $itemBuilder;
@@ -85,6 +85,22 @@ class ModelBase extends Model
         $totalBuilder
             ->columns('COUNT(*) AS count');
         return array($itemBuilder, $totalBuilder);
+    }
+
+
+    public static function getPosts($limit = 7, $offset = 0 )
+    {
+        // $status = self::STATUS_PUBLISHED;
+        $posts  = Entries::query()
+            ->join(__NAMESPACE__ . "\Posts", "p.id =  " . __NAMESPACE__ . "\Entries.postId", "p", "LEFT")
+            // ->where("status = '{$status}'")
+            // ->orderBy('max('. __NAMESPACE__ . '\Entries.modifiedAt) DESC')
+            ->limit($limit, $offset)
+            ->execute();
+        if ($posts->valid()) {
+            return $posts;
+        }
+        return false;
     }
 
 

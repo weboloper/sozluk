@@ -3,6 +3,7 @@ namespace Weboloper\Models;
 
 use Phalcon\Mvc\Model;
 use Weboloper\Models\Users;
+use Weboloper\Models\Entries;
 use Weboloper\Models\ModelBase;
 
 /**
@@ -206,6 +207,7 @@ class Posts extends ModelBase
     public function initialize()
     {
     	$this->belongsTo('userId', Users::class, 'id', ['alias' => 'user', 'reusable' => true]);
+        $this->hasMany('id', Entries::class, 'postId', ['alias' => 'entries', 'reusable' => true]);
     }
 
     // NOT IN USE ANYMORE

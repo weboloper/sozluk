@@ -25,23 +25,23 @@ class VoltFunctions
             //     return 'container(' . Service\Vote::class . "::class)->getScore({$arguments})";
         }
 
-        // $property = $name;
-        // $class = '\Phanbook\Tools\ZFunction';
+        $property = $name;
+        $class = '\Weboloper\Utils\ZFunction';
 
-        // if (method_exists($class, $property)) {
-        //     return $class . '::' . $property . '(' . $arguments . ')';
-        // }
-        // if (!$arguments) {
-        //     // Get constant if exist
-        //     if (defined($class . '::' . $property)) {
-        //         return $class . '::' . $property;
-        //     }
+        if (method_exists($class, $property)) {
+            return $class . '::' . $property . '(' . $arguments . ')';
+        }
+        if (!$arguments) {
+            // Get constant if exist
+            if (defined($class . '::' . $property)) {
+                return $class . '::' . $property;
+            }
 
-        //     // Get static property if exist
-        //     if (property_exists($class, $property)) {
-        //         return $class . '::$' . $property;
-        //     }
-        // }
+            // Get static property if exist
+            if (property_exists($class, $property)) {
+                return $class . '::$' . $property;
+            }
+        }
 
         return null;
     }

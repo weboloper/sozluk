@@ -65,6 +65,10 @@ class ControllerBase extends Controller
 
     public function getFeed($page = 1)
     {        
+        $limit = 5;
+        $offset     = ($page - 1) * $limit + 1;
+        return ModelBase::getPosts();
+
 
         $route = $this->router->getRewriteUri();
 
@@ -121,8 +125,8 @@ class ControllerBase extends Controller
         return $itemBuilder->getQuery()->execute();
 
         // NOT IN USE ANYMORE
-        // $limit = 5;
-        // $offset     = ($page - 1) * $limit + 1;
+        $limit = 5;
+        $offset     = ($page - 1) * $limit + 1;
 
         // switch ($solframe) {
         //     case 'newposts':
