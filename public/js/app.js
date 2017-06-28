@@ -41,6 +41,7 @@ $('#post-list.not-mobile').on('click', '.solframe-link', function (e){
             }
  
             $('#content').html(data);
+            window.history.pushState( href , '', href);
 
         }
     })   
