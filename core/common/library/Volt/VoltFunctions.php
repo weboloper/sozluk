@@ -19,8 +19,8 @@ class VoltFunctions
                 return '$this->auth->isModerator()';
             case 'is_admin':
                 return '$this->auth->isAdmin()';
-            // case 'teaser':
-            //     return Functions\Teaser::class . "::create({$arguments})";
+            case 'markdown':
+                return \Weboloper\Utils\Markdown::class . "::create({$arguments})";
             // case 'vote_score':
             //     return 'container(' . Service\Vote::class . "::class)->getScore({$arguments})";
         }

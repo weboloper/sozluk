@@ -7,7 +7,7 @@
  		<a href="#" class="vote">▲</a>
  		<div class="entry-meta"><a href="/users/{{ entry.user.id }}">{{ entry.user.username }}</a> - {{ date('h:m:i d/m/Y', entry.createdAt )}} - <a data-toggle="collapse" href="#entry-{{entry.getId()}}" aria-expanded="false" aria-controls="entry-{{entry.getId()}}"><span></span></a></div>
  		<div id="entry-{{entry.getId()}}" class="collapse show">
-	 		<div class="entry-content">{{ entry.getContent()}}
+	 		<div class="entry-content">{{ markdown(entry.getContent()) }}
 	 		</div>
 	 		<div class="entry-footer"><div class="footer-links">{% if auth['id'] == entry.getUserId() %} <a href="/entries/edit/{{entry.getId()}}">düzenle</a> - {% endif %} <a href="#">bildir</a></div></div>
  		</div>
@@ -20,7 +20,7 @@
 			{{ form.render('postId', ['value' : post.getId() ]) }}
 			{{ form.render('title', ['value' : post.getTitle() ]) }}
 			<input type="hidden" name="<?= $this->security->getTokenKey() ?>" value="<?= $this->security->getToken() ?>">
-			<pre>? biçimlendirme: [[bkz]] ((gbkz))</pre>
+			<pre>? biçimlendirme: [[bkz]] <?php echo '{'.'{gbkz}}'; ?> </pre>
 		<button>ekle</button>
 	</form>
  	 

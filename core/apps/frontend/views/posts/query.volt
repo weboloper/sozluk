@@ -12,7 +12,7 @@
  				{{ form.render('postId') }}
  				{{ form.render('title', ['value' : query]) }}
  				<input type="hidden" name="<?= $this->security->getTokenKey() ?>" value="<?= $this->security->getToken() ?>">
- 				<pre>? biçimlendirme: [[bkz]] ((gbkz))</pre>
+ 				<pre>? biçimlendirme: [[bkz]] <?php echo '{'.'{gbkz}}'; ?> </pre>
 				<button>ekle</button>
 			</form>
 		 	 

@@ -83,7 +83,7 @@ class Module implements ModuleDefinitionInterface
                         'compiledSeparator' => '_'
                     ]);
 
-                    // $volt->getCompiler()->addExtension(new VoltFunctions());
+                    $volt->getCompiler()->addExtension(new VoltFunctions());
                     return $volt;
                 }
             ]);
