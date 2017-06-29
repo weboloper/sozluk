@@ -65,7 +65,8 @@ class ControllerBase extends Controller
 
     public function getFeed($page = 1)
     {        
- 
+       
+
 
         $route = $this->router->getRewriteUri();
 
@@ -90,8 +91,15 @@ class ControllerBase extends Controller
                 break;
         }
 
+
+        // $limit = 5;
+        // $offset     = ($page - 1) * $limit + 1;
+
+        // return ModelBase::getFeed($limit, $offset);
+
+
         
-        $perPage = 6;
+        $perPage = 11;
 
         if($solframe == 'newentries')
         {   

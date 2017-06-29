@@ -22,6 +22,8 @@ class ModelBase extends Model
         $di = FactoryDefault::getDefault();
         return $di->get('modelsManager')->createBuilder();
     }
+ 
+
 
     // public function getEntries($postsId, $type)
     // {
@@ -111,6 +113,16 @@ class ModelBase extends Model
             return $posts;
         }
         return false;
+    }
+
+    public static function getFeed($limit, $offset)
+    {   
+        $modelNamespace = __NAMESPACE__ . '\\' ;
+        $di = FactoryDefault::getDefault();
+
+        $posts = $di->get('modelsManager')->createQuery('SELECT * FROM '.$modelNamespace = __NAMESPACE__ . '\\' .'Posts LIMIT :limit:   ')->execute(['limit' => $limit   ]);
+
+        return $posts;
     }
 
 
