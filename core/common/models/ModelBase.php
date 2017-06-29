@@ -120,7 +120,7 @@ class ModelBase extends Model
         $modelNamespace = __NAMESPACE__ . '\\' ;
         $di = FactoryDefault::getDefault();
 
-        $posts = $di->get('modelsManager')->createQuery('SELECT * FROM '.$modelNamespace = __NAMESPACE__ . '\\' .'Posts LIMIT :limit:   ')->execute(['limit' => $limit   ]);
+        $posts = $di->get('modelsManager')->createQuery('SELECT * FROM '.$modelNamespace = __NAMESPACE__ . '\\' .'Posts LIMIT  {limit:int} OFFSET {offset:int}  ')->execute( array('limit' => $limit , 'offset' => $offset ) );
 
         return $posts;
     }
