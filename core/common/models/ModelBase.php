@@ -36,7 +36,7 @@ class ModelBase extends Model
     //     return $resultset;
     // }
 
-    public static function prepareQueriesPosts($join, $where, $limit = 15)
+    public static function prepareQueriesPosts($join, $where, $limit = 15 , $type = 'entry')
     {
         $modelNamespace = __NAMESPACE__ . '\\' ;
         /**
@@ -44,8 +44,10 @@ class ModelBase extends Model
          * @var \Phalcon\Mvc\Model\Query\BuilderInterface $itemBuilder
          */
         $itemBuilder = self::getBuilder()
-            ->from(['p' => Posts::class])
-            ->orderBy('p.createdAt DESC');
+            ->from(['e' => Entries::class])
+            ->join($modelNamespace."Posts", "e.postId = p.id", "p")
+            ->join($modelNamespace."Users", "p.userId = u.id", "u");
+            
         if (isset($join) && is_array($join)) {
             $type = (string) $join['type'];
             $itemBuilder->$type($modelNamespace . $join['model'], $join['on'], $join['alias']);
@@ -53,8 +55,16 @@ class ModelBase extends Model
         if (isset($where)) {
             $itemBuilder->where($where);
         }
+
+        if($type == 'post'){
+            
+            $setColumns = array('p.id as pId, p.title as pTitle, p.slug as pSlug, u.username as uUsername, u.id as uId,   p.createdAt as feedDate');
+        }else {
+            $setColumns = array('p.id as pId, p.title as pTitle, p.slug as pSlug, u.username as uUsername, u.id as uId, max(e.modifiedAt) as feedDate  ');
+        }
+
         $itemBuilder
-            ->columns(array('p.*'))
+            ->columns( $setColumns )
             ->limit($limit);
        
         return $itemBuilder;

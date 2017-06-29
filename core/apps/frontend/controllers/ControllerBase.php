@@ -65,10 +65,7 @@ class ControllerBase extends Controller
 
     public function getFeed($page = 1)
     {        
-        $limit = 5;
-        $offset     = ($page - 1) * $limit + 1;
-        return ModelBase::getPosts();
-
+ 
 
         $route = $this->router->getRewriteUri();
 
@@ -94,23 +91,25 @@ class ControllerBase extends Controller
         }
 
         
-        $perPage = 25;
+        $perPage = 6;
 
         if($solframe == 'newentries')
         {   
-            $join = [
-                'type'  => 'leftjoin',
-                'model' => 'Entries',
-                'on'    => 'e.postId = p.id',
-                'alias' => 'e'
+            // $join = [
+            //     'type'  => 'leftjoin',
+            //     'model' => 'Entries',
+            //     'on'    => 'e.postId = p.id',
+            //     'alias' => 'e'
 
-            ];
-            $itemBuilder = ModelBase::prepareQueriesPosts( $join, false, $perPage);
-            $itemBuilder->orderBy('max(e.modifiedAt) DESC');
+            // ];
+            $itemBuilder = ModelBase::prepareQueriesPosts( $join = '', false, $perPage , $type = 'entry' );
+            $itemBuilder->orderBy('feedDate DESC');
             $itemBuilder->groupBy(array('p.id'));
           
         }else {
-            $itemBuilder = ModelBase::prepareQueriesPosts('', false, $perPage);
+            $itemBuilder = ModelBase::prepareQueriesPosts( $join = '' , false, $perPage,  $type = 'post');
+            $itemBuilder->orderBy('feedDate DESC');
+            $itemBuilder->groupBy(array('p.id'));
         }
         
         $type   = Posts::TYPE_POST;
@@ -125,8 +124,8 @@ class ControllerBase extends Controller
         return $itemBuilder->getQuery()->execute();
 
         // NOT IN USE ANYMORE
-        $limit = 5;
-        $offset     = ($page - 1) * $limit + 1;
+        // $limit = 5;
+        // $offset     = ($page - 1) * $limit + 1;
 
         // switch ($solframe) {
         //     case 'newposts':
