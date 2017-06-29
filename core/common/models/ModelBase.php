@@ -115,12 +115,31 @@ class ModelBase extends Model
         return false;
     }
 
-    public static function getFeed($limit, $offset)
+    public static function getFeed($limit, $offset, $solframe)
     {   
         $modelNamespace = __NAMESPACE__ . '\\' ;
         $di = FactoryDefault::getDefault();
+        
+        switch ($solframe) {
+            case 'newposts':
+                $query = $di->get('modelsManager')->createQuery('SELECT * FROM '.$modelNamespace = __NAMESPACE__ . '\\' .'Posts 
+                                                        LIMIT  {limit:int} OFFSET {offset:int}  ');
+                break;
+            
+            default:
+                #newentries
+                $query = $di->get('modelsManager')->createQuery('SELECT title, username , max(e.modifiedAt) as mod 
+                                                        FROM '.$modelNamespace = __NAMESPACE__ . '\\' .'Entries AS e
+                                                        LEFT JOIN '.$modelNamespace = __NAMESPACE__ . '\\' .'Posts AS p ON p.id = e.postId 
+                                                        LEFT JOIN '.$modelNamespace = __NAMESPACE__ . '\\' .'Users AS u ON u.id = e.userId 
+                                                        GROUP BY e.postId, e.userId
+                                                        ORDER BY mod DESC
+                                                        LIMIT  {limit:int} OFFSET {offset:int}  ');
+                break;
+        }
+        
 
-        $posts = $di->get('modelsManager')->createQuery('SELECT * FROM '.$modelNamespace = __NAMESPACE__ . '\\' .'Posts LIMIT  {limit:int} OFFSET {offset:int}  ')->execute( array('limit' => $limit , 'offset' => $offset ) );
+        $posts = $query->execute( array('limit' => $limit , 'offset' => $offset ) );
 
         return $posts;
     }
