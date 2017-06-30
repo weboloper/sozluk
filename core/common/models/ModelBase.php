@@ -122,16 +122,16 @@ class ModelBase extends Model
         
         switch ($solframe) {
             case 'newposts':
-                $query = $di->get('modelsManager')->createQuery('SELECT * FROM '.$modelNamespace = __NAMESPACE__ . '\\' .'Posts 
+                $query = $di->get('modelsManager')->createQuery('SELECT * FROM '.$modelNamespace.'Posts 
                                                         LIMIT  {limit:int} OFFSET {offset:int}  ');
                 break;
             
             default:
                 #newentries
                 $query = $di->get('modelsManager')->createQuery('SELECT title, username , max(e.modifiedAt) as mod 
-                                                        FROM '.$modelNamespace = __NAMESPACE__ . '\\' .'Entries AS e
-                                                        LEFT JOIN '.$modelNamespace = __NAMESPACE__ . '\\' .'Posts AS p ON p.id = e.postId 
-                                                        LEFT JOIN '.$modelNamespace = __NAMESPACE__ . '\\' .'Users AS u ON u.id = e.userId 
+                                                        FROM '.$modelNamespace.'Entries AS e
+                                                        LEFT JOIN '.$modelNamespace.'Posts AS p ON p.id = e.postId 
+                                                        LEFT JOIN '.$modelNamespace.'Users AS u ON u.id = e.userId 
                                                         GROUP BY e.postId, e.userId
                                                         ORDER BY mod DESC
                                                         LIMIT  {limit:int} OFFSET {offset:int}  ');
