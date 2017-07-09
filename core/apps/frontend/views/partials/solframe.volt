@@ -3,8 +3,8 @@
 		{% if not(feeds is empty ) %}
 			{% for feed in feeds %}
 			<li>
-				{{ dump(feed)}}
-		 
+				{{ link_to( ["for": "postView", "slug":  feed.slug, "id" : feed.id   ], feed.title , 'class' : 'solframe-link' , 'data-id' : feed.id ) }}
+				<div class="entry-meta"><a href="/users/{{ feed.uid }}">{{ feed.username }}</a> - {{ getHumanDate( feed.modifiedAt )}} </div>
 			</li>
 			{% endfor %}
 		{% endif %}

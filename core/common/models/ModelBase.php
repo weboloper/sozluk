@@ -115,31 +115,74 @@ class ModelBase extends Model
         return false;
     }
 
-    public static function getFeed($limit, $offset, $solframe)
+    public static function getFeed($solframe, $page)
     {   
         $modelNamespace = __NAMESPACE__ . '\\' ;
         $di = FactoryDefault::getDefault();
+
+        $type   = Posts::TYPE_POST;
+        $etype  = Entries::TYPE_ENTRY;
+        $status = Posts::STATUS_PUBLISHED;
+        
+        $limit = 5;
+        $offset     =  ($page - 1) * $limit ;
+
+
+        $sql = 'SELECT p.title , p.slug, p.id , username, u.id as uid, le.modifiedAt  FROM '.$modelNamespace.'Posts  AS p
+                        LEFT JOIN '.$modelNamespace.'Entries le ON le.postId = p.id 
+                              AND le.modifiedAt = 
+                                (
+                                   SELECT MAX(z.modifiedAt) 
+                                   FROM '.$modelNamespace.'Entries z 
+                                   WHERE z.postId = p.id
+                                )
+                        ';
+
         
         switch ($solframe) {
             case 'newposts':
-                $query = $di->get('modelsManager')->createQuery('SELECT * FROM '.$modelNamespace.'Posts 
-                                                        LIMIT  {limit:int} OFFSET {offset:int}  ');
+                // $query = $di->get('modelsManager')->createQuery('SELECT * FROM '.$modelNamespace.'Posts 
+                //                                         LIMIT  {limit:int} OFFSET {offset:int}  ');
+
+                $query = $di->get('modelsManager')->createQuery(
+                        $sql."
+                        LEFT JOIN ".$modelNamespace."Users As u ON p.userId = u.id
+                        WHERE p.type  = '{$type}' AND p.status = '{$status}' AND le.type = '{$etype}'
+                        GROUP BY p.id,  le.id 
+                        ORDER BY p.modifiedAt DESC
+                        LIMIT   {$limit}  OFFSET  {$offset}  "
+
+                    );
+
                 break;
             
             default:
                 #newentries
-                $query = $di->get('modelsManager')->createQuery('SELECT title, username , max(e.modifiedAt) as mod 
-                                                        FROM '.$modelNamespace.'Entries AS e
-                                                        LEFT JOIN '.$modelNamespace.'Posts AS p ON p.id = e.postId 
-                                                        LEFT JOIN '.$modelNamespace.'Users AS u ON u.id = e.userId 
-                                                        GROUP BY e.postId, e.userId
-                                                        ORDER BY mod DESC
-                                                        LIMIT  {limit:int} OFFSET {offset:int}  ');
+
+                $query = $di->get('modelsManager')->createQuery(
+                        $sql."
+                        LEFT JOIN ".$modelNamespace."Users As u ON le.userId = u.id
+                        WHERE p.type  = '{$type}' AND p.status = '{$status}' AND le.type = '{$etype}'
+                        GROUP BY p.id,  le.id 
+                        ORDER BY le.modifiedAt DESC
+                        LIMIT   {$limit}  OFFSET  {$offset} "
+                        
+
+                    );
                 break;
+
+                // $query = $di->get('modelsManager')->createQuery('SELECT title, username , max(e.modifiedAt) as mod 
+                //                                         FROM '.$modelNamespace.'Entries AS e
+                //                                         LEFT JOIN '.$modelNamespace.'Posts AS p ON p.id = e.postId 
+                //                                         LEFT JOIN '.$modelNamespace.'Users AS u ON u.id = e.userId 
+                //                                         GROUP BY e.postId, e.userId
+                //                                         ORDER BY mod DESC
+                //                                         LIMIT  {limit:int} OFFSET {offset:int}  ');
+                // break;
         }
         
 
-        $posts = $query->execute( array('limit' => $limit , 'offset' => $offset ) );
+        $posts = $query->execute();
 
         return $posts;
     }

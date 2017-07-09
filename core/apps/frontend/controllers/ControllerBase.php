@@ -65,8 +65,6 @@ class ControllerBase extends Controller
 
     public function getFeed($page = 1)
     {        
-       
-
 
         $route = $this->router->getRewriteUri();
 
@@ -92,12 +90,12 @@ class ControllerBase extends Controller
         }
 
 
-        $limit = 5;
-        $offset     = ($page - 1) * $limit + 1;
+        
 
-        return ModelBase::getFeed($limit, $offset , $solframe);
+        return ModelBase::getFeed($solframe , $page);
 
 
+        # END HERE
         
         $perPage = 11;
 
@@ -155,14 +153,14 @@ class ControllerBase extends Controller
             return $this->response->redirect('/');
         }
 
-        
-
         $page = $this->request->getPost("page");
+
 
         
         // $response = new \Phalcon\Http\Response();
         $feeds = self::getFeed($page);
- 
+
+  
         $this->view->setVars(['feeds' => $feeds ]);
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
         return  $this->view->pick("partials/more");
