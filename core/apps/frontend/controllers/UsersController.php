@@ -5,7 +5,9 @@ use Phalcon\Tag;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Weboloper\Frontend\Forms\ChangePasswordForm;
+use Weboloper\Models\ModelBase;
 use Weboloper\Models\Users;
+use Weboloper\Models\Entries;
 use Phalcon\Mvc\Controller;
 
 /**
@@ -76,15 +78,48 @@ class UsersController extends ControllerBase
             return;
         }
 
+        $page    = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $perPage = 15;
+        $params = null;
+
+        $join = [
+                'type'  => 'leftjoin',
+                'model' => 'Posts',
+                'on'    => 'e.postId = p.id',
+                'alias' => 'p'
+
+            ];
+
+        list($itemBuilder, $totalBuilder) =
+                ModelBase::prepareQueriesEntries( $join , false, $perPage);
+
+        $type   = Entries::TYPE_ENTRY;
+        $status = Entries::STATUS_PUBLISHED;
+        $conditions = "e.userId = ?0 AND e.deletedAt = 0 AND e.type  = '{$type}' AND e.status = '{$status}'";
+        $params = array($user->id);
+        $itemBuilder->andWhere($conditions);
+        $totalBuilder->andWhere($conditions);
+
+        $totalEntries= $totalBuilder->getQuery()->setUniqueRow(true)->execute($params);
+        $totalPages = ceil($totalEntries->count / $perPage);
+
+        $offset     = ($page - 1) * $perPage ;
+        if ($page > 1) {
+            $itemBuilder->offset($offset);
+        }
+
+       
         $this->view->setVars(
-            [
- 
-                'user'     => $user 
+            [   
+                'user'     => $user,
+                'entries'     => $itemBuilder->getQuery()->execute($params),
+                'totalPages'  => $totalPages,
+                'currentPage' => $page,
 
 
             ]
         );
-
+ 
 
     }
 }
