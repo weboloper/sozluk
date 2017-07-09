@@ -1,4 +1,5 @@
-<h1>{{ link_to( ["for": "postView", "slug":  post.getSlug(), "id" : post.getId()   ], post.getTitle() ) }}</h1>
+<h1>{{ link_to( ["for": "postView", "slug":  post.getSlug(), "id" : post.getId()   ], post.getTitle()   ) }}</h1>
+
 
  <ul id="entry-list">
 
@@ -19,7 +20,7 @@
  	{{ form( 'posts/entry/' ~ post.getId(), 'class' : 'entry-form'  ) }}
 			{{ form.render('content',[ 'id' : 'entry-content', 'rows' : 4 ]) }}
 			{{ form.render('postId', ['value' : post.getId() ]) }}
-			{{ form.render('title', ['value' : post.getTitle() ]) }}
+			{{ form.render('title', ['value' : post.getTitle() | striptags ]) }}
 			<input type="hidden" name="<?= $this->security->getTokenKey() ?>" value="<?= $this->security->getToken() ?>">
 			<pre>? biçimlendirme: [[bkz]] <?php echo '{'.'{gbkz}}'; ?> </pre>
 		<button>ekle</button>

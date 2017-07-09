@@ -151,8 +151,8 @@ class PostsController extends ControllerBase
             return $this->response->redirect('/session/login');
         }
 
-        $title = $this->request->getPost("title", "trim");
-        $content = $this->request->getPost("content", "trim");
+        $title = $this->request->getPost("title", "string");
+        $content = $this->request->getPost("content", "string");
 
         if(empty($title) || empty($content))
         {

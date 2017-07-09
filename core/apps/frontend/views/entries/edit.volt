@@ -11,7 +11,7 @@
  				{{ form.render('content',[ 'id' : 'entry-content', 'rows' : 4  ]) }}
  				{{ form.render('postId' ) }}
  				{{ form.render('title', ['value' : post.getTitle() ]) }}
-  				<pre>? biçimlendirme: [[bkz]] ((gbkz))</pre>
+  				<pre>? biçimlendirme: [[bkz]] {{gbkz}}</pre>
 				<button>ekle</button>
 				<input type="hidden" name="<?= $this->security->getTokenKey() ?>" value="<?= $this->security->getToken() ?>">
 			</form>
