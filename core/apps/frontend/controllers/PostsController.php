@@ -120,7 +120,7 @@ class PostsController extends ControllerBase
         $totalEntries= $totalBuilder->getQuery()->setUniqueRow(true)->execute($params);
         $totalPages = ceil($totalEntries->count / $perPage);
 
-        $offset     = ($page - 1) * $perPage + 1;
+        $offset     = ($page - 1) * $perPage ;
         if ($page > 1) {
             $itemBuilder->offset($offset);
         }

@@ -17,6 +17,26 @@
  	{% endfor %}
  	 
 
+ 	{% if totalPages > 1 %}
+	    {% set controller = this.view.getControllerName() | lower  %}
+	    {% set action = this.view.getActionName() | lower %}
+
+	    {% set startIndex = 1  %}
+	 
+ 	           
+	            sayfa:  <select onchange="if (this.value) window.location.href=this.value">
+	            {% for pageIndex in startIndex..totalPages %}
+
+	                <option value="?page={{pageIndex}}" {% if pageIndex is currentPage %}selected{% endif %}>{{ pageIndex }}</option>
+	 
+	            {% endfor %}
+	            </select>
+	            /  <a href="?page={{ totalPages }}">{{ totalPages }}</a>
+	    </br>
+	    </br>
+	{% endif %}
+
+
  	{{ form( 'posts/entry/' ~ post.getId(), 'class' : 'entry-form'  ) }}
 			{{ form.render('content',[ 'id' : 'entry-content', 'rows' : 4 ]) }}
 			{{ form.render('postId', ['value' : post.getId() ]) }}
@@ -27,3 +47,8 @@
 	</form>
  	 
  </ul>
+
+
+
+
+ 
